@@ -1,0 +1,133 @@
+basePath: /
+definitions:
+  infrastructure.Error:
+    properties:
+      message:
+        type: string
+    type: object
+  model.User:
+    properties:
+      created_at:
+        example: "2017-07-21T17:32:28Z"
+        type: string
+      id:
+        example: 1
+        type: integer
+      mail_address:
+        example: test@clean-arch-example.com
+        type: string
+      updated_at:
+        example: "2017-07-21T17:32:28Z"
+        type: string
+    required:
+    - mail_address
+    type: object
+  model.Users:
+    properties:
+      user:
+        items:
+          $ref: '#/definitions/model.User'
+        type: array
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: hiromisuzuki/clean-arch-example generated docs.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: clean architecture example
+  version: "2.0"
+paths:
+  /users:
+    get:
+      description: '[sample] get Users'
+      parameters:
+      - description: page of results to return. default is 1.
+        in: query
+        name: page
+        type: number
+      - description: number of records to return in one request, specified as an integer
+          from 1 to 100. default is 100.
+        in: query
+        name: per_page
+        type: number
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Users'
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/infrastructure.Error'
+            type: object
+      summary: '[sample] Show Users'
+    post:
+      consumes:
+      - application/json
+      description: '[sample] Create a User'
+      parameters:
+      - description: User Mail Address
+        in: body
+        name: mail_address
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.User'
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/infrastructure.Error'
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/infrastructure.Error'
+            type: object
+      summary: '[sample] Create a User'
+  /users/{id}:
+    get:
+      consumes:
+      - application/json
+      description: '[sample] get User by ID'
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.User'
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/infrastructure.Error'
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/infrastructure.Error'
+            type: object
+      summary: '[sample] Show a User'
+swagger: "2.0"

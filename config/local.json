@@ -1,0 +1,22 @@
+{
+  "debug": true,
+  "server": {
+    "address": ":8080"
+  },
+  "context": {
+    "timeout": 2
+  },
+  "database": {
+    "dbms": "mysql",
+    "host": "clean-arch-example-db",
+    "port": "3306",
+    "user": "clean-arch-example",
+    "pass": "clean-arch-example",
+    "name": "clean-arch-example",
+    "options": {
+      "parse_time": "1",
+      "loc": "Asia/Tokyo"
+    }
+  }
+
+}
